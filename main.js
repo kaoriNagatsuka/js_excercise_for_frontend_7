@@ -23,12 +23,12 @@
     })
     // 3.
     .then(data => {
-      const QuizListUl = document.getElementById('quiz-list');
-  
+      const quizListUl = document.getElementById('quiz-list');
+
       data.results.forEach((quiz, index) => {
         const indexQuiz = document.createElement('li');
         indexQuiz.textContent = `${index + 1}件目のクイズデータ`;
-        QuizListUl.appendChild(indexQuiz);
+        quizListUl.appendChild(indexQuiz);
         indexQuiz.appendChild(buildQuizList(quiz));
       });
     });
