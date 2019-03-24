@@ -15,6 +15,23 @@
   //       - 「◯件目のクイズデータ」をli要素として追加する
   //       - buildQuizList関数の戻り値(ul要素のDOM)をli要素に追加する。(結果としてネスト(入れ子)構造のリストになる)
 
+  // 1.
+  fetch(API_URL)
+    // 2.
+    .then(response => {
+      return response.json();
+    })
+    // 3.
+    .then(data => {
+      const QuizListUl = document.getElementById('quiz-list');
+  
+      data.results.forEach((quiz, index) => {
+        const indexQuiz = document.createElement('li');
+        indexQuiz.textContent = `${index + 1}件目のクイズデータ`;
+        QuizListUl.appendChild(indexQuiz);
+        indexQuiz.appendChild(buildQuizList(quiz));
+      });
+    });
 
   // `buildQuizList関数` を実装する
   //   - 実装する内容
@@ -29,5 +46,15 @@
   //    - quiz : オブジェクト(クイズデータ)
   //  - 戻り値
   //    - ul要素のDOM
+  const buildQuizList = (quiz) => {
+    const nestUl = document.createElement('ul');
+    for (const prop in quiz) {
+      const nestLi = document.createElement('li');
+      nestLi.innerHTML = `<strong>${prop}</strong> : ${quiz[prop]}`;
+      nestUl.appendChild(nestLi);
+    }
+    return nestUl;
+  };
+
 
 })();
